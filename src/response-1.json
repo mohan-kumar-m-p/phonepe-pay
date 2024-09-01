@@ -1,0 +1,35 @@
+{
+  "respInitPayment": {
+    "merchantId": "PGTESTPAYUAT86",
+    "merchantTransactionId": "MP1725211907635",
+    "instrumentResponse": {
+      "type": "PAY_PAGE",
+      "redirectInfo": {
+        "url": "https://mercury-uat.phonepe.com/transact/simulator?token=2EYozZUFujTRlzl0YsaspheeegTmn1VsGGwjHAGIj",
+        "method": "GET"
+      }
+    }
+  },
+
+  "respAfterPayment": {
+    "success": true,
+    "code": "PAYMENT_SUCCESS",
+    "message": "Your payment is successful.",
+    "data": {
+      "merchantId": "PGTESTPAYUAT86",
+      "merchantTransactionId": "MP1725211907635",
+      "transactionId": "T2409012301479644579701",
+      "amount": 10000,
+      "state": "COMPLETED",
+      "responseCode": "SUCCESS",
+      "paymentInstrument": {
+        "type": "UPI",
+        "utr": "206378866112",
+        "upiTransactionId": "AXLd8ee55a8fd50452da92639907560b6cd",
+        "accountHolderName": "Rajesh Kumar",
+        "cardNetwork": null,
+        "accountType": "SAVINGS"
+      }
+    }
+  }
+}

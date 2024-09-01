@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PhonePe Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+        .container {
+            padding: 1rem;
+        }
+        #response-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="invoice-footer" style="display: flex; align-items: center; justify-content: center">
+            <button id="api-button">PAY NOW</button>
+        </div>
+
+        <div id="response-container">
+            <!-- API Response will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Function to call the API and display the response
+        function callApi() {
+            fetch("http://localhost:3005/payment", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    user_id: "123",
+                    price: 100,
+                    phone: "7892421601",
+                    name: "Mohan",
+                }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success && data.redirectUrl) {
+                    // Redirect the user to the payment page
+                    window.location.href = data.redirectUrl;
+                } else {
+                    // Display API response
+                    const responseContainer = document.getElementById("response-container");
+                    responseContainer.innerHTML = `
+                        <div>
+                            <h3>API Response:</h3>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    `;
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                // Display error
+                const responseContainer = document.getElementById("response-container");
+                responseContainer.innerHTML = `
+                    <div>
+                        <h3>Error:</h3>
+                        <pre>${error.message}</pre>
+                    </div>
+                `;
+            });
+        }
+
+        // Add event listener to the button
+        document.getElementById("api-button").addEventListener("click", callApi);
+    </script>
+</body>
+</html>
